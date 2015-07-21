@@ -56,66 +56,66 @@ staff (id, first_name, last_name,status) - Methods
 
 //Enter staff id
 if ( $input['text'] == "" ) {
-    // This is the first request. Note how we start the response with CON
-    $response  = "Please enter Staff ID";
-    sendOutput($response,1);
+     // This is the first request. Note how we start the response with CON
+     $response  = "Please enter Staff ID";
+	 sendOutput($response,1);
 }else{
-    //receive what Edwin has sent in as text
-    $id = $input['text'];
+	//receive what Edwin has sent in as text
+	$id = $input['text'];
 
 
-    $leo = array('name'=>'Leo', 'staff_id' => 1234);
+$leo = array('name'=>'Leo', 'staff_id' => 1234);
 
-    $macharia = array('name'=>'Macharia', 'staff_id' => 12345);
+$macharia = array('name'=>'Macharia', 'staff_id' => 12345);
 
-    $kevin = array('name'=>'Kevin', 'staff_id' => 231);
+$kevin = array('name'=>'Kevin', 'staff_id' => 231);
 
-    $staff = array('1234'=>$leo,'12345'=>$macharia,'231'=>$kevin);
+ $staff = array('1234'=>$leo,'12345'=>$macharia,'231'=>$kevin);
 
-    if(!empty($staff[$id])){
-        $message= "ID is valid and it belongs to ".$staff[$id]['name'];
+if(!empty($staff[$id])){
+  $message= "ID is valid and it belongs to ".$staff[$id]['name'];
 
-    }else{
-        $message =  "No Staff with that id";
-    }
+}else{
+ $message =  "No Staff with that id";
+}
 
 
-    sendOutput($message,2);
+	sendOutput($message,2);
 
 
 }
 //verify if the id belongs to one of the staff members
 function getInput(){
-    $input = array();
-    $input['sessionId']   = $_REQUEST["sessionId"];
-    $input['serviceCode'] = $_REQUEST["serviceCode"];
-    $input['phoneNumber'] = $_REQUEST["phoneNumber"];
-    $input['text']        = $_REQUEST["text"];
+$input = array();
+$input['sessionId']   = $_REQUEST["sessionId"];
+$input['serviceCode'] = $_REQUEST["serviceCode"];
+$input['phoneNumber'] = $_REQUEST["phoneNumber"];
+$input['text']        = $_REQUEST["text"];
 
-    return $input;
+return $input;
 
 }
 
 function sendOutput($message,$type=2){
-    //Type 1 is a continuation, type 2 output is an end
+	//Type 1 is a continuation, type 2 output is an end
 
-    if($type==1){
-        echo "CON ".$message;
-    }elseif($type==2){
-        echo "END ".$message;
-    }else{
-        echo "END We faced an error";
-    }
-    exit;
+	if($type==1){
+		echo "CON ".$message;
+	}elseif($type==2){
+		echo "END ".$message;
+	}else{
+		echo "END We faced an error";
+	}
+	exit;
 }
 
 //create staff
 function createStaff($first_name,$last_name){
 
-    $query = mysql_query("INSERT INTO staff (first_name,last_name)
+   $query = mysql_query("INSERT INTO staff (first_name,last_name)
   VALUES ('$first_name','$last_name')");
 
-    return $query;
+  return $query;
 }
 //get staff
 function getStaff($id){
